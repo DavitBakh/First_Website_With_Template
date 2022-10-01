@@ -8,6 +8,9 @@ namespace FirstWebsite.Data.Concreate
 {
     public class EstateRepository
     {
-       
+        public EstateRepository()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

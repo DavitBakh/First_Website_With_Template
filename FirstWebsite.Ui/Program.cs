@@ -1,4 +1,4 @@
-using FirstWebsite.Ui.Data;
+using FirstWebsite.Data.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

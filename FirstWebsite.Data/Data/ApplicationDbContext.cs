@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace FirstWebsite.Ui.Data
+namespace FirstWebsite.Data.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -12,11 +12,12 @@ namespace FirstWebsite.Ui.Data
 
         }
 
-        DbSet<Estate> Estates { get; set; } = null!;
-        DbSet<Address> Addresses { get; set; } = null!;
-        DbSet<Country> Countries { get; set; } = null!;
-        DbSet<City> Citys { get; set; } = null!;
+        public DbSet<Estate> Estates { get; set; } = null!;
+        public DbSet<Address> Addresses { get; set; } = null!;
+        public DbSet<Country> Countries { get; set; } = null!;
+        public DbSet<City> Citys { get; set; } = null!;
 
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Estate>()

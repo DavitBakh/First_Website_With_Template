@@ -1,6 +1,8 @@
 ﻿using FirstWebsite.Ui.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using FirstWebsite.Data.Data;
+using FirstWebsite.Data.Entities;
 
 namespace FirstWebsite.Ui.Controllers
 {
@@ -8,19 +10,24 @@ namespace FirstWebsite.Ui.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context; 
         }
 
        
         public IActionResult Index()
         {
-            return View();
+            Estate? estate = _context.Estates.Find(5);
+                return View();
         }
 
         public IActionResult Pordznakan()
         {
+            
             return View();
         }
 
