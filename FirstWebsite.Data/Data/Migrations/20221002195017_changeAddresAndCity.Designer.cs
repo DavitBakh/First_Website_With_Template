@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstWebsite.Data.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220923173854_changeDbSetNames")]
-    partial class changeDbSetNames
+    [Migration("20221002195017_changeAddresAndCity")]
+    partial class changeAddresAndCity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,6 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -48,8 +45,6 @@ namespace FirstWebsite.Data.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.ToTable("Addresses");
                 });
@@ -73,6 +68,11 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isPopular")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -114,6 +114,9 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -132,6 +135,8 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Estates");
                 });
@@ -338,17 +343,6 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FirstWebsite.Data.Entities.Address", b =>
-                {
-                    b.HasOne("FirstWebsite.Data.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
             modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
                 {
                     b.HasOne("FirstWebsite.Data.Entities.Country", "Country")
@@ -368,7 +362,15 @@ namespace FirstWebsite.Data.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FirstWebsite.Data.Entities.City", "City")
+                        .WithMany("Estates")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Address");
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -420,6 +422,11 @@ namespace FirstWebsite.Data.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
+                {
+                    b.Navigation("Estates");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Country", b =>

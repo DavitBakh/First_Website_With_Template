@@ -36,6 +36,10 @@ namespace FirstWebsite.Data.Data
                .Property(p => p.IsDeleted)
                .HasDefaultValue(false);
 
+            builder.Entity<City>()
+                .Property(p => p.isPopular)
+                .HasDefaultValue(false);
+
             base.OnModelCreating(builder);
         }
     }

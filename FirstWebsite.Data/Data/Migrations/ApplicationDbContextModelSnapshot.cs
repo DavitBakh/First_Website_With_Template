@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FirstWebsite.Ui.Data.Migrations
+namespace FirstWebsite.Data.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -30,9 +30,6 @@ namespace FirstWebsite.Ui.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -47,9 +44,7 @@ namespace FirstWebsite.Ui.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
@@ -72,11 +67,16 @@ namespace FirstWebsite.Ui.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isPopular")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Citys", (string)null);
+                    b.ToTable("Citys");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Country", b =>
@@ -98,7 +98,7 @@ namespace FirstWebsite.Ui.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Estate", b =>
@@ -110,6 +110,9 @@ namespace FirstWebsite.Ui.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -131,7 +134,9 @@ namespace FirstWebsite.Ui.Data.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Estates", (string)null);
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Estates");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -336,17 +341,6 @@ namespace FirstWebsite.Ui.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FirstWebsite.Data.Entities.Address", b =>
-                {
-                    b.HasOne("FirstWebsite.Data.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
             modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
                 {
                     b.HasOne("FirstWebsite.Data.Entities.Country", "Country")
@@ -366,7 +360,15 @@ namespace FirstWebsite.Ui.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FirstWebsite.Data.Entities.City", "City")
+                        .WithMany("Estates")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Address");
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -418,6 +420,11 @@ namespace FirstWebsite.Ui.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
+                {
+                    b.Navigation("Estates");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Country", b =>

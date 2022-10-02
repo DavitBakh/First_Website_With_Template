@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FirstWebsite.Ui.Data.Migrations
+namespace FirstWebsite.Data.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220923173415_addedEntities")]

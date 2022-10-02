@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstWebsite.Data.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220923173854_changeDbSetNames")]
-    partial class changeDbSetNames
+    [Migration("20221002173404_City-IsPopularPropertyAdded")]
+    partial class CityIsPopularPropertyAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,11 @@ namespace FirstWebsite.Data.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isPopular")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
@@ -114,6 +119,9 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -132,6 +140,8 @@ namespace FirstWebsite.Data.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Estates");
                 });
@@ -368,6 +378,10 @@ namespace FirstWebsite.Data.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FirstWebsite.Data.Entities.City", null)
+                        .WithMany("Estates")
+                        .HasForeignKey("CityId");
+
                     b.Navigation("Address");
                 });
 
@@ -420,6 +434,11 @@ namespace FirstWebsite.Data.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
+                {
+                    b.Navigation("Estates");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Country", b =>

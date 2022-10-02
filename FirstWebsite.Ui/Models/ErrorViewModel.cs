@@ -1,4 +1,4 @@
-namespace FirstWebsite.Ui.Models
+namespace FirstWebsite.WebUi.Models
 {
     public class ErrorViewModel
     {

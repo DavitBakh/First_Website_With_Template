@@ -1,10 +1,10 @@
-﻿using FirstWebsite.Ui.Models;
+﻿using FirstWebsite.WebUi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using FirstWebsite.Data.Data;
 using FirstWebsite.Data.Entities;
 
-namespace FirstWebsite.Ui.Controllers
+namespace FirstWebsite.WebUi.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,23 +12,35 @@ namespace FirstWebsite.Ui.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
-            _context = context; 
+            _context = context;
         }
 
-       
+
         public IActionResult Index()
         {
-            Estate? estate = _context.Estates.Find(5);
-                return View();
-        }
+            List<City> popularCities = _context.Citys.Where(c => c.isPopular).ToList();
 
-        public IActionResult Pordznakan()
-        {
-            
-            return View();
+            List<PopularPlaceViewModel> popularPlaceViewModels = new List<PopularPlaceViewModel>();
+
+            foreach (City item in popularCities)
+            {
+                popularPlaceViewModels.Add(new PopularPlaceViewModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    EstatesCount = item.Estates.Count()
+                });
+            }
+
+            HomePageViewModel viewModel = new HomePageViewModel()
+            {
+                PopularPlaces = popularPlaceViewModels
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

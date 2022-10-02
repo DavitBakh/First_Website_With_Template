@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FirstWebsite.Ui.Data.Migrations
+namespace FirstWebsite.Data.Data.Migrations
 {
     public partial class addedEntities : Migration
     {

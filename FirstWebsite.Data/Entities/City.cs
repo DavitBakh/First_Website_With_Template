@@ -12,10 +12,15 @@ namespace FirstWebsite.Data.Entities
         {
             this.Name = string.Empty;
             this.Country = new Country();
+            Estates = new List<Estate>();
         }
 
         public string Name { get; set; }
 
+        public bool isPopular { get; set; }
+
         public virtual Country Country { get; set; }
+
+        public virtual ICollection<Estate> Estates { get; set; }
     }
 }
