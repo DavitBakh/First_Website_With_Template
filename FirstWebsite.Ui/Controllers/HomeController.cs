@@ -35,6 +35,8 @@ namespace FirstWebsite.WebUi.Controllers
                 });
             }
 
+            string str = popularPlaceViewModels.FirstOrDefault()?.Image;
+
             HomePageViewModel viewModel = new HomePageViewModel()
             {
                 PopularPlaces = popularPlaceViewModels

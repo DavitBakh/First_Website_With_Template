@@ -12,5 +12,12 @@
         public string Name { get; set; }
 
         public int EstatesCount { get; set; }
+
+
+        public string Image
+        {
+            get { return "temp-images/Popular Places/" + $"{Id}.jpg"; }
+        }
+
     }
 }
