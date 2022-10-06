@@ -1,3 +1,5 @@
+using FirstWebsite.Data.Abstract;
+using FirstWebsite.Data.Concreate;
 using FirstWebsite.Data.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,8 @@ namespace FirstWebsite.WebUi
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

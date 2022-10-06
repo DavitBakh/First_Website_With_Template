@@ -49,7 +49,7 @@
                     <div class="left-side">
                         <!-- Logo -->
                         <div id="logo">
-                            <a href="index.html"><img src="images/logo-white-1.svg" data-sticky-logo="images/logo-red.svg" alt=""></a>
+                            <a href="index.html"><img src="~/images/logo-white-1.svg" data-sticky-logo="images/logo-red.svg" alt=""></a>
                         </div>
                         <!-- Mobile Navigation -->
                         <div class="mmenu-trigger">
@@ -201,7 +201,7 @@
                                                 <li><a href="user-profile.html">User Profile</a></li>
                                                 <li><a href="my-listings.html">My Properties</a></li>
                                                 <li><a href="favorited-listings.html">Favorited Properties</a></li>
-                                                <li><a href="add-property.html">Add Property</a></li>
+                                                <li><a asp-action="AddProperty">Add Property</a></li>
                                                 <li><a href="payment-method.html">Payment Method</a></li>
                                                 <li><a href="invoice.html">Invoice</a></li>
                                                 <li><a href="change-password.html">Change Password</a></li>
@@ -241,7 +241,7 @@
                                 <li><a href="contact-us.html">Contact</a></li>
                                 <li class="d-none d-xl-none d-block d-lg-block"><a href="login.html">Login</a></li>
                                 <li class="d-none d-xl-none d-block d-lg-block"><a href="register.html">Register</a></li>
-                                <li class="d-none d-xl-none d-block d-lg-block mt-5 pb-4 ml-5 border-bottom-0"><a href="add-property.html" class="button border btn-lg btn-block text-center">Add Listing<i class="fas fa-laptop-house ml-2"></i></a></li>
+                                <li class="d-none d-xl-none d-block d-lg-block mt-5 pb-4 ml-5 border-bottom-0"><a asp-action="AddProperty" class="button border btn-lg btn-block text-center">Add Listing<i class="fas fa-laptop-house ml-2"></i></a></li>
                             </ul>
                         </nav>
                         <!-- Main Navigation / End -->
@@ -251,7 +251,7 @@
                     <div class="right-side d-none d-none d-lg-none d-xl-flex">
                         <!-- Header Widget -->
                         <div class="header-widget">
-                            <a href="add-property.html" class="button border">Add Listing<i class="fas fa-laptop-house ml-2"></i></a>
+                            <a asp-action="AddProperty" class="button border">Add Listing<i class="fas fa-laptop-house ml-2"></i></a>
                         </div>
                         <!-- Header Widget / End -->
                     </div>
@@ -259,11 +259,11 @@
                     <!-- Right Side Content / End -->
                     <div class="header-user-menu user-menu add">
                         <div class="header-user-name">
-                            <span><img src="images/testimonials/ts-1.jpg" alt=""></span>Hi, Mary!
+                            <span><img src="~/images/testimonials/ts-1.jpg" alt=""></span>Hi, Mary!
                         </div>
                         <ul>
                             <li><a href="user-profile.html"> Edit profile</a></li>
-                            <li><a href="add-property.html"> Add Property</a></li>
+                            <li><a asp-action="AddProperty"> Add Property</a></li>
                             <li><a href="payment-method.html">  Payments</a></li>
                             <li><a href="change-password.html"> Change Password</a></li>
                             <li><a href="#">Log Out</a></li>
@@ -310,7 +310,7 @@
                         <div class="col-lg-3 col-md-6">
                             <div class="netabout">
                                 <a href="index.html" class="logo">
-                                    <img src="images/logo-footer.svg" alt="netcom">
+                                    <img src="~/images/logo-footer.svg" alt="netcom">
                                 </a>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
                             </div>

@@ -4,6 +4,7 @@ using FirstWebsite.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstWebsite.Data.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221003171506_someChangesInEstateAndAddedOwnerContactInfo")]
+    partial class someChangesInEstateAndAddedOwnerContactInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.City", b =>
@@ -76,7 +78,7 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Citys", (string)null);
+                    b.ToTable("Citys");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Country", b =>
@@ -98,7 +100,7 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.Estate", b =>
@@ -148,7 +150,7 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Estates", (string)null);
+                    b.ToTable("Estates");
                 });
 
             modelBuilder.Entity("FirstWebsite.Data.Entities.OwnerContactInfo", b =>
@@ -182,7 +184,7 @@ namespace FirstWebsite.Data.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OwnerContacts", (string)null);
+                    b.ToTable("OwnerContacts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

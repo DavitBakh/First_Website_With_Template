@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FirstWebsite.Data.Abstract
 {
-    public interface IGenericRepository<T>
+    public interface IGenericRepository<T> where T : class
     {
         void Add(T entity);
 
@@ -14,11 +14,11 @@ namespace FirstWebsite.Data.Abstract
         void Update(T entity);
         
         T? FindById(int id);
-        Task<T?> FindByIdAsync();
+        Task<T?> FindByIdAsync(int id);
 
         void Save();
         Task SaveAsync();
 
-        IEnumerable<T> GetAll();
+        IQueryable<T> GetAll();
     }
 }
